@@ -1,0 +1,706 @@
+<div class="container-fluid bg">
+  <div class="heading">List Your preschool/daycare</div> 
+</div>
+<div *ngIf="!success">
+    <div class="container"  >
+        <h2>Registration Form</h2>
+        <form [formGroup]='entryPageRegistartion' (ngSubmit)="firstPage()">
+            <div class="form-group">
+                <label>Name of preschool/daycare</label>
+                <input [class.is-invalid]="entryPageRegistartion.get('name').invalid && entryPageRegistartion.get('name').touched" formControlName = 'name' type="text" class="form-control">
+                <small *ngIf="entryPageRegistartion.get('name').invalid && entryPageRegistartion.get('name').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <select formControlName = 'state' [class.is-invalid]="entryPageRegistartion.get('state').invalid && entryPageRegistartion.get('state').touched && entryPageRegistartion.value.state==''" (change)="setState($event)" class="form-control" id="state" >
+                  <option value=''>Choose your state</option>
+                  <option *ngFor = "let state of states">{{state}}</option>
+                </select>
+                <small *ngIf="entryPageRegistartion.get('state').invalid && entryPageRegistartion.get('state').touched && entryPageRegistartion.value.state==''" class="text-danger">Please fill it</small>
+        
+              </div>
+            <div class="form-group">
+                <label>City</label>
+                <input formControlName = 'city' [class.is-invalid]="entryPageRegistartion.get('city').invalid && entryPageRegistartion.get('city').touched" type="text" class="form-control">
+                <small *ngIf="entryPageRegistartion.get('city').invalid && entryPageRegistartion.get('city').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label>Locality</label>
+                <input formControlName = 'locality' [class.is-invalid]="entryPageRegistartion.get('locality').invalid && entryPageRegistartion.get('locality').touched" type="text" class="form-control">
+                <small *ngIf="entryPageRegistartion.get('locality').invalid && entryPageRegistartion.get('locality').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label>Address of the School</label>
+                <input formControlName = 'address' [class.is-invalid]="entryPageRegistartion.get('address').invalid && entryPageRegistartion.get('address').touched" type="text" class="form-control">
+                <small *ngIf="entryPageRegistartion.get('address').invalid && entryPageRegistartion.get('address').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label>Pincode</label>
+                <input formControlName = 'pincode' [class.is-invalid]="entryPageRegistartion.get('pincode').invalid && entryPageRegistartion.get('pincode').touched" type="number" class="form-control">
+                <small *ngIf="entryPageRegistartion.get('pincode').invalid && entryPageRegistartion.get('pincode').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label>Contact Person Name</label>
+                <input formControlName = 'contactPerson' [class.is-invalid]="entryPageRegistartion.get('contactPerson').invalid && entryPageRegistartion.get('contactPerson').touched" type="text" class="form-control">
+                <small *ngIf="entryPageRegistartion.get('contactPerson').invalid && entryPageRegistartion.get('contactPerson').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label>Primary Mobile Number</label>
+                <input formControlName = 'primaryNumber' [class.is-invalid]="entryPageRegistartion.get('primaryNumber').invalid && entryPageRegistartion.get('primaryNumber').touched" type="number" class="form-control">
+                <small *ngIf="entryPageRegistartion.get('primaryNumber').invalid && entryPageRegistartion.get('primaryNumber').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label>Alternate Mobile Number</label>
+                <input formControlName = 'alternativeNumber' [class.is-invalid]="entryPageRegistartion.get('alternativeNumber').invalid && entryPageRegistartion.get('alternativeNumber').touched" type="number" class="form-control">
+                <small *ngIf="entryPageRegistartion.get('alternativeNumber').invalid && entryPageRegistartion.get('alternativeNumber').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label>E-Mail ID</label>
+                <input formControlName = 'email' [class.is-invalid]="entryPageRegistartion.get('email').invalid && entryPageRegistartion.get('email').touched" type="email" class="form-control">
+                <small *ngIf="entryPageRegistartion.get('email').errors?.required && entryPageRegistartion.get('email').touched" class="text-danger">Please fill it</small>
+                <small *ngIf="entryPageRegistartion.get('email').errors?.pattern && entryPageRegistartion.get('email').touched" class="text-danger">Please provide a valid email address</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="preschool_daycare" style="margin-right: 1%;" >Do you offer a preschool or daycare?</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" formControlName = 'preSchoolDaycare' type="radio" name="preSchoolDaycare"  value="Preschool">
+                    <label class="form-check-label">
+                      Preschool
+                    </label>
+                  </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" formControlName = 'preSchoolDaycare' type="radio" name="preSchoolDaycare"  value="Daycare">
+                    <label class="form-check-label" >
+                      Daycare
+                    </label>
+                  </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" formControlName = 'preSchoolDaycare' type="radio" name="preSchoolDaycare"  value="Both">
+                    <label class="form-check-label" >
+                      Both
+                    </label>
+                  </div>
+                  <small *ngIf="entryPageRegistartion.get('preSchoolDaycare').errors?.required&&entryPageRegistartion.get('preSchoolDaycare').touched" class="text-danger">Please choose</small>
+    
+            </div>
+            <div  >
+            <button class="btn btn-primary" style=" display:block;width:10%;margin:0 auto;" type="submit">Next</button>
+            </div>
+    
+        </form>
+    
+    
+        <!-- {{entryPageRegistartion.value | json}} -->
+    </div>
+    
+    
+    <div class="container" *ngIf ="(afterEntryPage) && entryPageRegistartion.value.preSchoolDaycare=='Both'||entryPageRegistartion.value.preSchoolDaycare=='Preschool'">
+        <h2>Preschool Information</h2>
+        <form [formGroup]='preSchoolRegistartion'>
+            <div class="form-group">
+                <label>Minimum age for Preschool (in months) </label>
+                <input formControlName = 'minAge' [class.is-invalid]="preSchoolRegistartion.get('minAge').invalid && preSchoolRegistartion.get('minAge').touched" type="number" class="form-control">
+                <small *ngIf="preSchoolRegistartion.get('minAge').invalid && preSchoolRegistartion.get('minAge').touched" class="text-danger">Please fill it</small>
+    
+            </div>
+            <div class="form-group">
+                <label>Maximum age for Preschool (in months) </label>
+                <input formControlName = 'maxAge' [class.is-invalid]="preSchoolRegistartion.get('maxAge').invalid && preSchoolRegistartion.get('maxAge').touched" type="number" class="form-control">
+                <small *ngIf="preSchoolRegistartion.get('maxAge').invalid && preSchoolRegistartion.get('maxAge').touched" class="text-danger">Please fill it</small>
+                
+            </div>
+            <div class="form-group">
+                <div>Working days for Preschool</div>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" formControlName = 'workingDays' name='workingDays' autocomplete="off" value='Monday - Friday'> Monday - Friday
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" formControlName = 'workingDays' name='workingDays' autocomplete="off" value='Saturday'> Saturday
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" formControlName = 'workingDays' name='workingDays' autocomplete="off" value='Sunday'> Sunday
+                    </label>
+                  </div>            
+            </div>
+            <div class="form-group">
+                <label>Preschool Starting Time</label>
+                <input  formControlName = 'startTime' [class.is-invalid]="preSchoolRegistartion.get('startTime').invalid && preSchoolRegistartion.get('startTime').touched" type="time" class="form-control">
+                <small *ngIf="preSchoolRegistartion.get('startTime').invalid && preSchoolRegistartion.get('startTime').touched" class="text-danger">Please fill it</small>
+            
+            </div>
+            <div class="form-group">
+                <label>Preschool Closing Time</label>
+                <input formControlName = 'endTime'[class.is-invalid]="preSchoolRegistartion.get('endTime').invalid && preSchoolRegistartion.get('endTime').touched" type="time" class="form-control">
+                <small *ngIf="preSchoolRegistartion.get('endTime').invalid && preSchoolRegistartion.get('endTime').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label>Preschool Curriculum</label>
+                <input formControlName = 'curriculum' [class.is-invalid]="preSchoolRegistartion.get('curriculum').invalid && preSchoolRegistartion.get('curriculum').touched" type="text" class="form-control">
+                <small *ngIf="preSchoolRegistartion.get('curriculum').invalid && preSchoolRegistartion.get('curriculum').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label for="afterSchoolCare">Does your School provide After School Care? </label>
+                <div class="form-check">
+                    <input class="form-check-input" formControlName = 'afterSchoolCare' type="radio" name="afterSchoolCare"  value="Yes">
+                    <label class="form-check-label">
+                      Yes
+                    </label>
+                  </div>
+                <div class="form-check">
+                    <input class="form-check-input" formControlName = 'afterSchoolCare' type="radio" name="afterSchoolCare"  value="No">
+                    <label class="form-check-label" >
+                      No
+                    </label>
+                </div>
+                <small *ngIf="preSchoolRegistartion.get('afterSchoolCare').errors?.required&&preSchoolRegistartion.get('afterSchoolCare').touched" class="text-danger">Please choose</small>
+    
+                <!-- <button class="btn btn-primary space" type="submit" (click)=firstPageAgain()>Back</button>
+                <button class="btn btn-primary space" type="submit" (click)=afterSchoolCare()>After School Care</button>
+                <button class="btn btn-primary space" type="submit" (click)=partA()>No Next</button> -->
+    
+    
+            </div>
+    
+        </form>
+    
+        <!-- {{preSchoolRegistartion.value | json}} -->
+    
+        <div class="container" *ngIf ="preSchoolRegistartion.value.afterSchoolCare=='Yes'">
+            <h2>After school Information</h2>
+            <form [formGroup] = 'afterSchoolRegistartion'>
+                <div class="form-group">
+                    <label>Minimum age for After School (in months) </label>
+                    <input formControlName = 'minAge' [class.is-invalid]="afterSchoolRegistartion.get('minAge').invalid && afterSchoolRegistartion.get('minAge').touched" type="number" class="form-control">
+                    <small *ngIf="afterSchoolRegistartion.get('minAge').invalid && afterSchoolRegistartion.get('minAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>Maximum age for After School (in months) </label>
+                    <input formControlName = 'maxAge' [class.is-invalid]="afterSchoolRegistartion.get('maxAge').invalid && afterSchoolRegistartion.get('maxAge').touched" type="number" class="form-control">
+                    <small *ngIf="afterSchoolRegistartion.get('maxAge').invalid && afterSchoolRegistartion.get('maxAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <div>Working days for After School care</div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox"  autocomplete="off"> Monday - Friday
+                        </label>
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" autocomplete="off"> Saturday
+                        </label>
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" autocomplete="off"> Sunday
+                        </label>
+                      </div>            
+                </div>
+                <div class="form-group">
+                    <label>After School Starting Time</label>
+                    <input formControlName = 'startTime' [class.is-invalid]="afterSchoolRegistartion.get('startTime').invalid && afterSchoolRegistartion.get('startTime').touched" type="time" class="form-control">
+                    <small *ngIf="afterSchoolRegistartion.get('startTime').invalid && afterSchoolRegistartion.get('startTime').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>After School Closing Time</label>
+                    <input formControlName = 'endTime'[class.is-invalid]="afterSchoolRegistartion.get('endTime').invalid && afterSchoolRegistartion.get('endTime').touched" type="time" class="form-control">
+                    <small *ngIf="afterSchoolRegistartion.get('endTime').invalid && afterSchoolRegistartion.get('endTime').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>After School Curriculum</label>
+                    <input formControlName = 'curriculum' [class.is-invalid]="afterSchoolRegistartion.get('curriculum').invalid && afterSchoolRegistartion.get('curriculum').touched" type="text" class="form-control">
+                    <small *ngIf="afterSchoolRegistartion.get('curriculum').invalid && afterSchoolRegistartion.get('curriculum').touched" class="text-danger">Please fill it</small>
+                </div>
+                <!-- <button class="btn btn-primary space" type="submit" (click)=preSchoolAgain()>Back</button>
+                <button class="btn btn-primary space" type="submit" (click)=partA()>No Next</button> -->
+            </form>
+        
+            <!-- {{afterSchoolRegistartion.value | json}} -->
+        
+        </div>
+        
+    
+    
+    </div>
+    
+     
+    
+    
+    
+    <div class="container" *ngIf="(afterEntryPage) &&entryPageRegistartion.value.preSchoolDaycare=='Both'||entryPageRegistartion.value.preSchoolDaycare=='Daycare'">
+        <h1>Daycare Information</h1>
+        <h2>Part A</h2>
+        <form [formGroup]='partARegistration'>
+            <label for="fullDayCare">Do you offer full daycare?</label>
+            <div class="form-check">
+                <input class="form-check-input" formControlName = 'fullDayCare' type="radio" name="fullDayCare"  value="Yes">
+                <label class="form-check-label">
+                  Yes
+                </label>
+              </div>
+            <div class="form-check">
+                <input class="form-check-input" formControlName = 'fullDayCare' type="radio" name="fullDayCare"  value="No">
+                <label class="form-check-label" >
+                  No
+                </label>
+            </div>
+            <small *ngIf="partARegistration.get('fullDayCare').errors?.required&&partARegistration.get('fullDayCare').touched" class="text-danger">Please choose</small>
+    
+            <!-- <button class="btn btn-primary space" type="submit" (click)=preSchoolAfterSchoolAgain()>Back</button>
+            <button class="btn btn-primary space" type="submit" (click)=fullDayCare()>After School Care</button>
+            <button class="btn btn-primary space" type="submit" (click)=partB()>No Next</button> -->
+        </form>
+        <div class="container" *ngIf ="partARegistration.value.fullDayCare=='Yes'">
+            <h2>Full daycare Information</h2>
+            <form [formGroup]='fullDayCareRegistartion'>
+                <div class="form-group">
+                    <label>Minimum age for full daycare (in months) </label>
+                    <input type="number" formControlName = 'minAge' [class.is-invalid]="fullDayCareRegistartion.get('minAge').invalid && fullDayCareRegistartion.get('minAge').touched" class="form-control">
+                    <small *ngIf="fullDayCareRegistartion.get('minAge').invalid && fullDayCareRegistartion.get('minAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>Maximum age for full daycare (in months) </label>
+                    <input type="number" formControlName = 'maxAge' [class.is-invalid]="fullDayCareRegistartion.get('maxAge').invalid && fullDayCareRegistartion.get('maxAge').touched" class="form-control">
+                    <small *ngIf="fullDayCareRegistartion.get('maxAge').invalid && fullDayCareRegistartion.get('maxAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <div>Working days full daycare care</div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox"  autocomplete="off"> Monday - Friday
+                        </label>
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" autocomplete="off"> Saturday
+                        </label>
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" autocomplete="off"> Sunday
+                        </label>
+                      </div>            
+                </div>
+                <div class="form-group">
+                    <label>Full Daycare Starting Time</label>
+                    <input type="time"  formControlName = 'startTime' [class.is-invalid]="fullDayCareRegistartion.get('startTime').invalid && fullDayCareRegistartion.get('startTime').touched" class="form-control">
+                    <small *ngIf="fullDayCareRegistartion.get('startTime').invalid && fullDayCareRegistartion.get('startTime').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>Full Daycare Closing Time</label>
+                    <input type="time" formControlName = 'endTime' [class.is-invalid]="fullDayCareRegistartion.get('endTime').invalid && fullDayCareRegistartion.get('endTime').touched" class="form-control">
+                    <small *ngIf="fullDayCareRegistartion.get('endTime').invalid && fullDayCareRegistartion.get('endTime').touched" class="text-danger">Please fill it</small>
+                </div>
+               
+                <!-- <button class="btn btn-primary space" type="submit" (click)=partA()>Back</button>
+                <button class="btn btn-primary space" type="submit" (click)=partB()>No Next</button> -->
+            </form>
+        
+            <!-- {{fullDayCareRegistartion.value | json}} -->
+        
+        </div>
+        
+    </div>
+    
+    
+    
+    <div class="container" *ngIf="(afterEntryPage) &&entryPageRegistartion.value.preSchoolDaycare=='Both'||entryPageRegistartion.value.preSchoolDaycare=='Daycare'">
+        <h2>Part B</h2>
+        <form [formGroup]='partBRegistration'>
+            <label for="fullDayCare">Do you offer weekend daycare?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName = 'weekendCare' name="weekendCare"  value="Yes">
+                <label class="form-check-label">
+                  Yes
+                </label>
+              </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName = 'weekendCare' name="weekendCare"  value="No">
+                <label class="form-check-label" >
+                  No
+                </label>
+            </div>
+            <small *ngIf="partBRegistration.get('weekendCare').errors?.required&&partBRegistration.get('weekendCare').touched" class="text-danger">Please choose</small>
+    
+            <!-- <button class="btn btn-primary space" type="submit" (click)=prvPartAorNot()>Back</button>
+            <button class="btn btn-primary space" type="submit" (click)=weekendCare()>Weekend Care</button>
+            <button class="btn btn-primary space" type="submit" (click)=partC()>No Next</button> -->
+        </form>
+        <div class="container" *ngIf ="partBRegistration.value.weekendCare=='Yes'">
+            <h2>Weekend care Information</h2>
+            <form [formGroup]='weekendCareRegistartion'>
+                <div class="form-group">
+                    <label>Minimum age for weekend care (in months) </label>
+                    <input type="number" formControlName = 'minAge' [class.is-invalid]="weekendCareRegistartion.get('minAge').invalid && weekendCareRegistartion.get('minAge').touched" class="form-control">
+                    <small *ngIf="weekendCareRegistartion.get('minAge').invalid && weekendCareRegistartion.get('minAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>Maximum age for weekend care (in months) </label>
+                    <input type="number"formControlName = 'maxAge'[class.is-invalid]="weekendCareRegistartion.get('maxAge').invalid && weekendCareRegistartion.get('maxAge').touched" class="form-control">
+                    <small *ngIf="weekendCareRegistartion.get('maxAge').invalid && weekendCareRegistartion.get('maxAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <div>Working days weekend care care</div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" autocomplete="off"> Saturday
+                        </label>
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" autocomplete="off"> Sunday
+                        </label>
+                      </div>            
+                </div>
+                <div class="form-group">
+                    <label>Weekend care Starting Time</label>
+                    <input type="time" formControlName = 'startTime' [class.is-invalid]="weekendCareRegistartion.get('startTime').invalid && weekendCareRegistartion.get('startTime').touched" class="form-control">
+                    <small *ngIf="weekendCareRegistartion.get('startTime').invalid && weekendCareRegistartion.get('startTime').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>Weekend care Closing Time</label>
+                    <input type="time" formControlName = 'endTime' [class.is-invalid]="weekendCareRegistartion.get('endTime').invalid && weekendCareRegistartion.get('endTime').touched" class="form-control">
+                    <small *ngIf="weekendCareRegistartion.get('endTime').invalid && weekendCareRegistartion.get('endTime').touched" class="text-danger">Please fill it</small>
+                </div>
+               
+                <!-- <button class="btn btn-primary space" type="submit" (click)=partB()>Back</button>
+                <button class="btn btn-primary space" type="submit" (click)=partC()>No Next</button> -->
+            </form>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    <div class="container" *ngIf="(afterEntryPage) &&entryPageRegistartion.value.preSchoolDaycare=='Both'||entryPageRegistartion.value.preSchoolDaycare=='Daycare'">
+        <h2>Part C</h2>
+        <form [formGroup]='partCRegistration'>
+            <label for="onDemandCare">Do you offer On-Demand daycare?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName = 'onDemandCare' name="onDemandCare"  value="Yes">
+                <label class="form-check-label">
+                  Yes
+                </label>
+              </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName = 'onDemandCare' name="onDemandCare"  value="No">
+                <label class="form-check-label" >
+                  No
+                </label>
+            </div>
+            <small *ngIf="partCRegistration.get('onDemandCare').errors?.required&&partCRegistration.get('onDemandCare').touched" class="text-danger">Please choose</small>
+    
+            <!-- <button class="btn btn-primary space" type="submit" (click)=prvPartBorNot()>Back</button>
+            <button class="btn btn-primary space" type="submit" (click)=onDemandCare()>Weekend Care</button>
+            <button class="btn btn-primary space" type="submit" (click)=partD()>No Next</button> -->
+        </form>
+        <div class="container" *ngIf ="partCRegistration.value.onDemandCare=='Yes'">
+            <h2>On-Demand care Information</h2>
+            <form [formGroup]='onDemandCareRegistartion'>
+                <div class="form-group">
+                    <label>Minimum age for On-Demand care (in months) </label>
+                    <input type="number" formControlName = 'minAge' [class.is-invalid]="onDemandCareRegistartion.get('minAge').invalid && onDemandCareRegistartion.get('minAge').touched" class="form-control">
+                    <small *ngIf="onDemandCareRegistartion.get('minAge').invalid && onDemandCareRegistartion.get('minAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>Maximum age for On-Demand care (in months) </label>
+                    <input type="number" formControlName = 'maxAge'[class.is-invalid]="onDemandCareRegistartion.get('maxAge').invalid && onDemandCareRegistartion.get('maxAge').touched" class="form-control">
+                    <small *ngIf="onDemandCareRegistartion.get('maxAge').invalid && onDemandCareRegistartion.get('maxAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <div>Working days On-Demand care care</div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary space">
+                            <input type="checkbox" formControlName="workingDays" name="workingDays" value='Monday - Friday' autocomplete="off"> Monday - Friday
+                          </label>
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" formControlName="workingDays" name="workingDays" value="Saturday" autocomplete="off"> Saturday
+                        </label>
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" formControlName="workingDays" name="workingDays" value="Sunday" autocomplete="off"> Sunday
+                        </label>
+                      </div>            
+                </div>
+                <div class="form-group">
+                    <label>On-Demand care Starting Time</label>
+                    <input type="time" formControlName = 'startTime'[class.is-invalid]="onDemandCareRegistartion.get('startTime').invalid && onDemandCareRegistartion.get('startTime').touched" class="form-control">
+                    <small *ngIf="onDemandCareRegistartion.get('startTime').invalid && onDemandCareRegistartion.get('startTime').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>On-Demand care Closing Time</label>
+                    <input type="time" formControlName = 'endTime' [class.is-invalid]="onDemandCareRegistartion.get('endTime').invalid && onDemandCareRegistartion.get('endTime').touched" class="form-control">
+                    <small *ngIf="onDemandCareRegistartion.get('endTime').invalid && onDemandCareRegistartion.get('endTime').touched" class="text-danger">Please fill it</small>
+                </div>
+               
+                <!-- <button class="btn btn-primary space" type="submit" (click)=partC()>Back</button>
+                <button class="btn btn-primary space" type="submit" (click)=partD()>No Next</button> -->
+            </form>
+            <!-- {{onDemandCareRegistartion.value | json}} -->
+        </div>    
+    </div>
+    
+    
+    
+    <div class="container" *ngIf="(afterEntryPage) &&entryPageRegistartion.value.preSchoolDaycare=='Both'||entryPageRegistartion.value.preSchoolDaycare=='Daycare'">
+        <h2>Part D</h2>
+        <form [formGroup]='partDRegistration'>
+            <label for="nightCare">Do you offer night care?</label>
+            <div class="form-check">
+                <input class="form-check-input" formControlName = 'nightCare'  type="radio" name="nightCare"  value="Yes">
+                <label class="form-check-label">
+                  Yes
+                </label>
+              </div>
+            <div class="form-check">
+                <input class="form-check-input" formControlName = 'nightCare' type="radio" name="nightCare"  value="No">
+                <label class="form-check-label" >
+                  No
+                </label>
+            </div>
+            <small *ngIf="partDRegistration.get('nightCare').errors?.required&&partDRegistration.get('nightCare').touched" class="text-danger">Please choose</small>
+            <!-- <button class="btn btn-primary space" type="submit" (click)=prvPartCorNot()>Back</button>
+            <button class="btn btn-primary space" type="submit" (click)=nightCare()>Night Care</button>
+            <button class="btn btn-primary space" type="submit" (click)=partE()>No Next</button> -->
+        </form>
+        <div class="container" *ngIf ="partDRegistration.value.nightCare=='Yes'">
+            <h2>Night care Information</h2>
+            <form [formGroup]='nightCareRegistartion'>
+                <div class="form-group">
+                    <label>Minimum age for night care (in months) </label>
+                <input class="form-check-input" formControlName = 'nightCare' [class.is-invalid]="nightCareRegistartion.get('minAge').invalid && nightCareRegistartion.get('name').touched" type="radio" name="nightCare"  value="Yes">
+                    <input type="number" formControlName = 'minAge' class="form-control">
+                    <small *ngIf="nightCareRegistartion.get('minAge').invalid && nightCareRegistartion.get('minAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>Maximum age for night care (in months) </label>
+                    <input type="number" formControlName = 'maxAge' [class.is-invalid]="nightCareRegistartion.get('maxAge').invalid && nightCareRegistartion.get('maxAge').touched" class="form-control">
+                    <small *ngIf="nightCareRegistartion.get('maxAge').invalid && nightCareRegistartion.get('maxAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <div>Working days night care</div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" autocomplete="off"> Saturday
+                        </label>
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" autocomplete="off"> Sunday
+                        </label>
+                      </div>            
+                </div>
+                <div class="form-group">
+                    <label>Night care Starting Time</label>
+                    <input type="time" formControlName = 'startTime'[class.is-invalid]="nightCareRegistartion.get('startTime').invalid && nightCareRegistartion.get('startTime').touched" class="form-control">
+                    <small *ngIf="nightCareRegistartion.get('startTime').invalid && nightCareRegistartion.get('startTime').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>Night care Closing Time</label>
+                    <input type="time" formControlName = 'endTime'[class.is-invalid]="nightCareRegistartion.get('endTime').invalid && nightCareRegistartion.get('endTime').touched" class="form-control">
+                    <small *ngIf="nightCareRegistartion.get('endTime').invalid && nightCareRegistartion.get('endTime').touched" class="text-danger">Please fill it</small>
+                </div>
+               
+                <!-- <button class="btn btn-primary space" type="submit" (click)=partD()>Back</button>
+                <button class="btn btn-primary space" type="submit" (click)=partE()>No Next</button> -->
+            </form>
+        </div>
+    </div>
+    
+    
+    
+    
+    <div class="container" *ngIf="(afterEntryPage) &&entryPageRegistartion.value.preSchoolDaycare=='Both'||entryPageRegistartion.value.preSchoolDaycare=='Daycare'">
+        <h2>Special School Information</h2>
+        <form [formGroup]='partERegistration' >
+            <label for="specialCare">Do you have programs for Special Children?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName = 'specialCare' name="specialCare"  value="Yes">
+                <label class="form-check-label">
+                  Yes
+                </label>
+              </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName = 'specialCare' name="specialCare"  value="No">
+                <label class="form-check-label">
+                  No
+                </label>
+            </div>
+            <small *ngIf="partERegistration.get('specialCare').errors?.required&&partERegistration.get('specialCare').touched" class="text-danger">Please choose</small>
+
+            <!-- <button class="btn btn-primary space" type="submit" (click)=prvPartDorNot()>Back</button>
+            <button class="btn btn-primary space" type="submit" (click)=specialCare()>Special Children</button>
+            <button class="btn btn-primary space" type="submit" (click)=facility()>No Next</button> -->
+        </form>
+        <div class="container" *ngIf ="partERegistration.value.specialCare=='yes'">
+            <h2>Special School Information</h2>
+            <form [formGroup]='specialCareRegistartion'>
+                <div class="form-group">
+                    <label>Minimum age for Special School (in months) </label>
+                    <input type="number" formControlName = 'minAge' [class.is-invalid]="specialCareRegistartion.get('minAge').invalid && specialCareRegistartion.get('minAge').touched" class="form-control">
+                    <small *ngIf="specialCareRegistartion.get('minAge').invalid && specialCareRegistartion.get('minAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>Maximum age for Special School (in months) </label>
+                    <input type="number" formControlName = 'maxAge' [class.is-invalid]="specialCareRegistartion.get('maxAge').invalid && specialCareRegistartion.get('maxAge').touched" class="form-control">
+                    <small *ngIf="specialCareRegistartion.get('maxAge').invalid && specialCareRegistartion.get('maxAge').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <div>Working days Special School</div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary space">
+                            <input type="checkbox"  autocomplete="off"> Monday - Friday
+                          </label>
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" autocomplete="off"> Saturday
+                        </label>
+                        <label class="btn btn-secondary space">
+                          <input type="checkbox" autocomplete="off"> Sunday
+                        </label>
+                      </div>            
+                </div>
+                <div class="form-group">
+                    <label>Special School Starting Time</label>
+                    <input type="time" formControlName = 'startTime'[class.is-invalid]="specialCareRegistartion.get('startTime').invalid && specialCareRegistartion.get('startTime').touched" class="form-control">
+                    <small *ngIf="specialCareRegistartion.get('startTime').invalid && specialCareRegistartion.get('startTime').touched" class="text-danger">Please fill it</small>
+                </div>
+                <div class="form-group">
+                    <label>Special School Closing Time</label>
+                    <input type="time" formControlName = 'endTime'[class.is-invalid]="specialCareRegistartion.get('endTime').invalid && specialCareRegistartion.get('endTime').touched" class="form-control">
+                    <small *ngIf="specialCareRegistartion.get('endTime').invalid && specialCareRegistartion.get('endTime').touched" class="text-danger">Please fill it</small>
+                </div>
+        
+                <label for="regular">Do you offer Inclusive school? (Accept both regular and special children)</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName = 'regular' name="regular"  value="Yes">
+                    <label class="form-check-label">
+                      Yes
+                    </label>
+                  </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName = 'regular' name="regular"  value="No">
+                    <label class="form-check-label">
+                      No
+                    </label>
+                </div>
+               
+                <!-- <button class="btn btn-primary space" type="submit" (click)=partE()>Back</button>
+                <button class="btn btn-primary space" type="submit" (click)=facility()>No Next</button> -->
+            </form>
+        </div>
+        
+        
+    </div>
+    
+    
+    
+    <div class="container" *ngIf ="(afterEntryPage) &&entryPageRegistartion.value.preSchoolDaycare=='Both'||entryPageRegistartion.value.preSchoolDaycare=='Daycare'||entryPageRegistartion.value.preSchoolDaycare=='Preschool'" >
+        <h2>Facilities Provided</h2>
+        <form [formGroup]='facilityPageRegistration'>
+            <div class="form-group">
+                <div>Select the facilities your school provides</div>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off"> Food
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Transport
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">CCTV Cameras
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">CCTV Live Feed to Parents
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Doctor on Cal
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Mobile App Updates
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Online Classes
+                    </label>
+                  </div>            
+            </div>
+            <div class="form-group">
+                <div>Select the ameneties offered by your school</div>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Indoor Play Area
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Outdoor Play Area
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Sandpit
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Splash/Swimming Pool
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">AC Rooms
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Security Guard
+                    </label>
+                  </div>            
+            </div>
+            <div class="form-group">
+                <div>List of extra Curricular Activities provided by your school</div>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Abacus
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Art and Craft
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Dance
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Drawing
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Martial Arts
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Music
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Painting
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Skating
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Yoga
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Yoga
+                    </label>
+                    <label class="btn btn-secondary space">
+                      <input type="checkbox" autocomplete="off">Tuition
+                    </label>
+                    <!-- <label>Others</label>
+                    <input type="text" class="form-control"> --> -->
+                 </div>            
+            </div>
+            <div class="form-group">
+                <label>Year of Establishment </label>
+                <input type="text" formControlName='year' [class.is-invalid]="facilityPageRegistration.get('year').invalid && facilityPageRegistration.get('year').touched" class="form-control">
+                <small *ngIf="facilityPageRegistration.get('year').invalid && facilityPageRegistration.get('year').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label>Preschool Website Link</label>
+                <input type="text" formControlName='link' [class.is-invalid]="facilityPageRegistration.get('link').invalid && facilityPageRegistration.get('link').touched" class="form-control">
+                <small *ngIf="facilityPageRegistration.get('link').invalid && facilityPageRegistration.get('link').touched" class="text-danger">Please fill it</small>
+            </div>
+            <div class="form-group">
+                <label>Photos (Add good quality photos which showcase your school premises. We suggest not to add photos with just one or two people)</label>
+                <input type="file" formControlName='file'[class.is-invalid]="facilityPageRegistration.get('file').invalid && facilityPageRegistration.get('file').touched" class="form-control">
+                <small *ngIf="facilityPageRegistration.get('file').invalid && facilityPageRegistration.get('file').touched" class="text-danger">Please fill it</small>
+            </div>
+           
+            <!-- <button class="btn btn-primary space" type="submit" (click)=prvPartEorNot()>Back</button> -->
+        </form>
+        <button class="btn btn-primary space" type="submit" (click)="submit()">Submit</button>
+        
+    </div> 
+    
+</div>
+
+<div *ngIf="success" class="container">
+    Form is submitted successfully! Thank you.
+  
+</div>
